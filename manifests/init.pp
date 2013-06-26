@@ -145,7 +145,13 @@ class redis (
     notify  => Service['redis'],
   }
 
-  file { $conf_dir:
+  $log_dir = '/var/log/redis'
+  $run_dir = '/var/run/redis'
+  file { [
+          $conf_dir,
+          $log_dir,
+          $run_dir,
+          ]:
     ensure  => directory,
     owner   => redis,
     group   => redis,
