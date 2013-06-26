@@ -78,6 +78,7 @@ class redis (
   $conf_zset_max_ziplist_value      = '64',
   $conf_activerehashing             = 'yes',
   $conf_include                     = UNSET,
+  $bindir                           = UNSET,
 ) {
 
   include redis::params
@@ -92,6 +93,11 @@ class redis (
   $conf_logfile_real = $conf_logfile ? {
     'UNSET' => $::redis::params::logfile,
     default => $conf_logfile,
+  }
+
+  $bindir_real = $bindir ? {
+    'UNSET' => $::redis::params::bindir,
+    default => $bindir,
   }
 
   package { 'redis':
