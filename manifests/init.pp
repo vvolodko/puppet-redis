@@ -165,4 +165,22 @@ class redis (
     require => Exec[$conf_dir],
   }
 
+  $log_dir = '/var/log/redis'
+  file { $log_dir:
+    ensure => directory,
+    user    => redis,
+    group   => redis,
+    require => Package['redis'],
+    notify  => Service['redis'],
+  }
+
+  $run_dir = '/var/run/redis'
+  exec { $run_dir:
+    ensure => directory,
+    user    => redis,
+    group   => redis,
+    require => Package['redis'],
+    notify  => Service['redis'],
+  }
+
 }
